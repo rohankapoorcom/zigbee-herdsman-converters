@@ -6794,6 +6794,7 @@ export const definitions: DefinitionWithExtend[] = [
             {modelID: "TS011F", applicationVersion: 65, priority: -1},
             {modelID: "TS011F", applicationVersion: 64, priority: -1},
             {modelID: "TS011F", softwareBuildID: "1.0.5\u0000", priority: -1},
+            {modelID: "TS011F", applicationVersion: 112, manufacturerName: "_TZ3000_ww6drja5"},
         ],
         model: "TS011F_plug_3",
         description: "Smart plug (with power monitoring by polling)",
@@ -6804,6 +6805,7 @@ export const definitions: DefinitionWithExtend[] = [
             {vendor: "AVATTO", model: "MIUCOT10Z"},
             {vendor: "Neo", model: "NAS-WR01B"},
             {vendor: "Neo", model: "PLUG-001SPB2"},
+            tuya.whitelabel("Girier", "JR-ZPM01_polling", "Smart Plug", ["_TZ3000_ww6drja5"]),
         ],
         ota: true,
         extend: [
