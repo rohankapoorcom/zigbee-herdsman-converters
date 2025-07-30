@@ -2118,7 +2118,9 @@ const fzLocal = {
         cluster: INOVELLI_CLUSTER_NAME,
         type: ["commandLedEffectComplete"],
         convert: (model, msg, publish, options, meta) => {
+            console.log(`Notification Type: ${msg.data.notification_type}`);
             if (Object.keys(LED_NOTIFICATION_TYPES).includes(msg.data.notification_type)) {
+                console.log(`Notification Type: ${LED_NOTIFICATION_TYPES[msg.data.notificationType]}`);
                 return {notificationComplete: LED_NOTIFICATION_TYPES[msg.data.notificationType]};
             }
             return {notificationComplete: "Unknown"};
@@ -2202,17 +2204,31 @@ const exposeMMWaveControl = () => {
         .withCategory("config");
 };
 
-const exposesListVZM30: Expose[] = [e.light_brightness(), exposeLedEffects(), exposeIndividualLedEffects()];
+const exposeLedEffectComplete = () => {
+    return e
+        .enum("notificationComplete", ea.STATE_GET, Object.values(LED_NOTIFICATION_TYPES))
+        .withDescription("Indication that a specific notification has completed.")
+        .withCategory("diagnostic");
+};
 
-const exposesListVZM31: Expose[] = [e.light_brightness(), exposeLedEffects(), exposeIndividualLedEffects()];
+const exposesListVZM30: Expose[] = [e.light_brightness(), exposeLedEffects(), exposeIndividualLedEffects(), exposeLedEffectComplete()];
 
-const exposesListVZM32: Expose[] = [e.light_brightness(), exposeLedEffects(), exposeIndividualLedEffects(), exposeMMWaveControl()];
+const exposesListVZM31: Expose[] = [e.light_brightness(), exposeLedEffects(), exposeIndividualLedEffects(), exposeLedEffectComplete()];
+
+const exposesListVZM32: Expose[] = [
+    e.light_brightness(),
+    exposeLedEffects(),
+    exposeIndividualLedEffects(),
+    exposeMMWaveControl(),
+    exposeLedEffectComplete(),
+];
 
 const exposesListVZM35: Expose[] = [
     e.fan().withState("fan_state").withModes(Object.keys(fanModes)),
     exposeLedEffects(),
     exposeIndividualLedEffects(),
     exposeBreezeMode(),
+    exposeLedEffectComplete(),
 ];
 
 const exposesListVZM36: Expose[] = [e.light_brightness(), e.fan().withState("fan_state").withModes(Object.keys(fanModes)), exposeBreezeMode()];
