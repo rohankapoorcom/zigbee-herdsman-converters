@@ -19021,8 +19021,10 @@ export const definitions: DefinitionWithExtend[] = [
             tuya.modernExtend.tuyaOnOff({
                 powerOnBehavior2: true,
                 onOffCountdown: true,
+                inchingSwitch: true,
                 endpoints: ["l1", "l2", "l3", "l4"],
             }),
+            tuya.clusters.addTuyaCommonPrivateCluster(),
             tuya.modernExtend.dpTemperature({dp: 102, scale: 10}),
             tuya.modernExtend.dpHumidity({dp: 103}),
         ],
