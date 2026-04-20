@@ -5256,6 +5256,7 @@ export const definitions: DefinitionWithExtend[] = [
             "_TZE204_wskr3up8",
             "_TZE204_gxbdnfrh",
             "_TZE284_g1enhdsi",
+            "_TZE284_r731zlxk",
         ]),
         model: "TS0601_switch_6_gang",
         vendor: "Tuya",
