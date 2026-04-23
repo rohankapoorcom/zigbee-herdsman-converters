@@ -3,7 +3,6 @@ import {Zcl} from "zigbee-herdsman";
 import {findByDevice, generateExternalDefinitionSource} from "../src";
 import * as fz from "../src/converters/fromZigbee";
 import {repInterval} from "../src/lib/constants";
-import * as philips from "../src/lib/philips";
 import {type AssertDefinitionArgs, assertDefinition, mockDevice, reportingItem} from "./utils";
 
 const assertGeneratedDefinition = async (args: AssertDefinitionArgs & {externalDefinitionSource?: string}) => {
@@ -359,7 +358,7 @@ export default {
                 endpoints: [{inputClusters: ["genOnOff", "lightingColorCtrl"], outputClusters: [], attributes}],
             }),
             meta: {supportsEnhancedHue: true, supportsHueAndSaturation: true, turnsOffAtBrightness1: true},
-            fromZigbee: [fz.on_off, fz.brightness, fz.level_config, fz.color_colortemp, fz.power_on_behavior, philips.manuSpecificPhilips2Fz],
+            fromZigbee: [fz.on_off, fz.brightness, fz.level_config, fz.color_colortemp, fz.power_on_behavior],
             toZigbee: [
                 "state",
                 "brightness",
@@ -387,24 +386,13 @@ export default {
                 "hue_step",
                 "saturation_step",
                 "power_on_behavior",
-                "effect_speed",
-                "gradient_scale",
-                "gradient_offset",
-                "gradient_style",
-                "effect_color",
                 "hue_power_on_behavior",
                 "hue_power_on_brightness",
                 "hue_power_on_color_temperature",
                 "hue_power_on_color",
                 "effect",
             ],
-            exposes: [
-                "effect",
-                "effect_color",
-                "effect_speed",
-                "light(state,brightness,color_temp,color_temp_startup,color_xy,color_hs)",
-                "power_on_behavior",
-            ],
+            exposes: ["effect", "light(state,brightness,color_temp,color_temp_startup,color_xy,color_hs)", "power_on_behavior"],
             bind: {},
             read: {
                 1: [
