@@ -23283,6 +23283,8 @@ export const definitions: DefinitionWithExtend[] = [
         },
     },
     {
+        // Incomplete. See _TZE200_mlglxwp3 datapoints here:
+        // https://github.com/Koenkk/zigbee-herdsman-converters/pull/12014
         fingerprint: tuya.fingerprint("TS0601", ["_TZE200_mlglxwp3"]),
         model: "TS0601_cover_12",
         vendor: "Tuya",
@@ -23308,6 +23310,35 @@ export const definitions: DefinitionWithExtend[] = [
                 [11, "situation_set", tuya.valueConverterBasic.lookup({fully_close: tuya.enum(0), fully_open: tuya.enum(1)})],
                 [12, "fault", tuya.valueConverter.raw],
                 [103, "battery", tuya.valueConverter.raw],
+            ],
+        },
+    },
+    {
+        fingerprint: tuya.fingerprint("TS0601", ["_TZE204_tgl8i2np"]),
+        model: "TS0601_cover_13",
+        vendor: "Tuya",
+        description: "Curtain motor",
+        extend: [tuya.modernExtend.tuyaBase({dp: true})],
+        exposes: [
+            e.cover_position().setAccess("position", ea.STATE_SET),
+            e.enum("motor_direction", ea.STATE_SET, ["forward", "back"]).withDescription("Motor direction"),
+            e.enum("work_state", ea.STATE, ["opening", "closing"]).withDescription("Current work state"),
+            e.numeric("total_time", ea.STATE).withUnit("ms").withDescription("Total running time in milliseconds"),
+            e.enum("situation_set", ea.STATE_SET, ["fully_close", "fully_open"]).withDescription("Set fully open or fully close position"),
+            e.binary("auto_power", ea.STATE_SET, true, false),
+            e.text("fault", ea.STATE).withDescription("Fault details"),
+        ],
+        meta: {
+            tuyaDatapoints: [
+                [1, "state", tuya.valueConverterBasic.lookup({OPEN: tuya.enum(0), STOP: tuya.enum(1), CLOSE: tuya.enum(2)})],
+                [2, "position", tuya.valueConverter.coverPosition],
+                [3, "position", tuya.valueConverter.coverPosition],
+                [5, "motor_direction", tuya.valueConverterBasic.lookup({forward: tuya.enum(0), back: tuya.enum(1)})],
+                [6, "auto_power", tuya.valueConverter.raw],
+                [7, "work_state", tuya.valueConverterBasic.lookup({opening: tuya.enum(0), closing: tuya.enum(1)})],
+                [10, "total_time", tuya.valueConverter.raw],
+                [11, "situation_set", tuya.valueConverterBasic.lookup({fully_close: tuya.enum(0), fully_open: tuya.enum(1)})],
+                [12, "fault", tuya.valueConverter.raw],
             ],
         },
     },
