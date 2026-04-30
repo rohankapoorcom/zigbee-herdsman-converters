@@ -147,12 +147,15 @@ export const definitions: DefinitionWithExtend[] = [
     },
 
     {
-        fingerprint: tuya.fingerprint("TS0601", ["_TZE284_gw05grph", "_TZE284_chcnj5st"]),
+        fingerprint: tuya.fingerprint("TS0601", ["_TZE284_gw05grph", "_TZE284_chcnj5st", "_TZE284_pislt0wa"]),
         model: "CZF02",
         vendor: "Lincukoo",
-        description: "Finger Robot",
+        description: "Finger Robot", //fingerbot
         extend: [tuya.modernExtend.tuyaBase({dp: true})],
-        whiteLabel: [tuya.whitelabel("Sygonix", "SY-6811314", "Zigbee Smart button/switch Pusher", ["_TZE284_chcnj5st"])],
+        whiteLabel: [
+            tuya.whitelabel("Sygonix", "SY-6811314", "Zigbee Smart button/switch Pusher", ["_TZE284_chcnj5st"]),
+            tuya.whitelabel("Nous", "C2", "Button/switch pusher", ["_TZE284_pislt0wa"]),
+        ],
         exposes: [
             e.switch(),
             e.enum("mode", ea.STATE_SET, ["click", "long_press"]).withDescription("work mode of the finger robot"),
@@ -183,11 +186,11 @@ export const definitions: DefinitionWithExtend[] = [
             tuyaDatapoints: [
                 [1, "state", tuya.valueConverter.onOff],
                 [2, "mode", tuya.valueConverterBasic.lookup({click: tuya.enum(0), long_press: tuya.enum(1)})],
-                [3, "click_sustain_time", tuya.valueConverter.divideBy10],
-                [5, "arm_down_percent", tuya.valueConverter.raw],
-                [6, "arm_up_percent", tuya.valueConverter.raw],
-                [101, "auto_adjustment", tuya.valueConverter.onOff],
-                [102, "set_switch_state", tuya.valueConverter.onOff],
+                [3, "click_sustain_time", tuya.valueConverter.divideBy10], // springback_time
+                [5, "arm_down_percent", tuya.valueConverter.raw], // initial_percent
+                [6, "arm_up_percent", tuya.valueConverter.raw], // end_percent
+                [101, "auto_adjustment", tuya.valueConverter.onOff], // auto
+                [102, "set_switch_state", tuya.valueConverter.onOff], // switching_display_status
                 [8, "battery", tuya.valueConverter.raw],
             ],
         },
