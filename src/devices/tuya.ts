@@ -5958,9 +5958,8 @@ export const definitions: DefinitionWithExtend[] = [
         model: "TS004F",
         vendor: "Tuya",
         description: "Wireless switch with 4 buttons",
-        extend: [tuya.modernExtend.tuyaBase()],
+        extend: [tuya.modernExtend.tuyaBase(), m.battery({voltage: true}), m.identify({isSleepy: true})],
         exposes: [
-            e.battery(),
             e
                 .enum("operation_mode", ea.ALL, ["command", "event"])
                 .withDescription('Operation mode: "command" - for group control, "event" - for clicks'),
@@ -5999,7 +5998,10 @@ export const definitions: DefinitionWithExtend[] = [
             fz.command_stop,
             fz.command_step_color_temperature,
         ],
-        whiteLabel: [tuya.whitelabel("Zemismart", "ZMR4", "Wireless switch with 4 buttons", ["_TZ3000_11pg3ima", "_TZ3000_et7afzxz"])],
+        whiteLabel: [
+            tuya.whitelabel("Zemismart", "ZMR4", "Wireless switch with 4 buttons", ["_TZ3000_11pg3ima", "_TZ3000_et7afzxz"]),
+            tuya.whitelabel("Moes", "TS004F_1", "Wireless switch with 4 buttons", ["_TZ3000_xabckq1v"]),
+        ],
         toZigbee: [tuya.tz.operation_mode],
         configure: async (device, coordinatorEndpoint) => {
             const endpoint = device.getEndpoint(1);
@@ -6011,8 +6013,6 @@ export const definitions: DefinitionWithExtend[] = [
             } catch {
                 /* do nothing */
             }
-            await endpoint.read("genPowerCfg", ["batteryVoltage", "batteryPercentageRemaining"]);
-            await reporting.bind(endpoint, coordinatorEndpoint, ["genPowerCfg"]);
             for (const ep of [1, 2, 3, 4]) {
                 // Not all variants have all endpoints
                 // https://github.com/Koenkk/zigbee2mqtt/issues/15730#issuecomment-1364498358
@@ -6020,7 +6020,6 @@ export const definitions: DefinitionWithExtend[] = [
                     await reporting.bind(device.getEndpoint(ep), coordinatorEndpoint, ["genOnOff"]);
                 }
             }
-            await reporting.batteryPercentageRemaining(endpoint);
         },
     },
     {
