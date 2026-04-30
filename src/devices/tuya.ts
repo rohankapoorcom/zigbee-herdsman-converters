@@ -6551,6 +6551,7 @@ export const definitions: DefinitionWithExtend[] = [
             "_TZ3000_fbjdkph9",
             "_TZ3000_zbfya6h0",
             "_TZ3000_hznzbl0x",
+            "_TZ3210_6smingw0",
         ]),
         model: "TS0002_basic",
         vendor: "Tuya",
@@ -6565,14 +6566,17 @@ export const definitions: DefinitionWithExtend[] = [
             tuya.whitelabel("Aubess", "TMZ02", "2 gang switch", ["_TZ3000_lmlsduws"]),
             tuya.whitelabel("RSH", "TS0002_basic_2", "2 gang switch", ["_TZ3000_zbfya6h0"]),
             tuya.whitelabel("EKAZA", "EKAC-T3092Z", "2 gang switch", ["_TZ3000_hznzbl0x"]),
+            tuya.whitelabel("Nova Digital", "NTZB-01", "1 switch and 1 socket with backlight", ["_TZ3210_6smingw0"]),
         ],
         extend: [
             tuya.modernExtend.tuyaBase(),
             tuya.modernExtend.tuyaOnOff({
                 switchType: true,
                 endpoints: ["l1", "l2"],
-                powerOutageMemory: true,
-                onOffCountdown: (m) => m === "_TZ3000_hznzbl0x",
+                powerOutageMemory: (m) => m !== "_TZ3210_6smingw0",
+                onOffCountdown: (m) => m === "_TZ3000_hznzbl0x" || m === "_TZ3210_6smingw0",
+                indicatorMode: (m) => m === "_TZ3210_6smingw0",
+                backlightModeOffOn: (m) => m === "_TZ3210_6smingw0",
             }),
         ],
         endpoint: (device) => {
@@ -6631,6 +6635,7 @@ export const definitions: DefinitionWithExtend[] = [
             tuya.whitelabel("RoomsAI", "37022463-2", "2 Gang switch with backlight", ["_TZ3000_ogpla3lh"]),
         ],
     },
+
     {
         // TS0002 2 gang switch module with all available features. This is the default for TS0002 devices.
         model: "TS0002",
