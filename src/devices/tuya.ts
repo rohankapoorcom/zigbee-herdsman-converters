@@ -3582,7 +3582,7 @@ export const definitions: DefinitionWithExtend[] = [
             tuya.whitelabel("Lidl", "14149505L/14149506L_2", "Livarno Lux light bar RGB+CCT (black/white)", ["_TZ3210_iystcadi"]),
             tuya.whitelabel("Tuya", "TS0505B_2_2", "Zigbee GU10/E14 5W smart bulb", ["_TZ3210_it1u8ahz"]),
         ],
-        extend: [tuyaLight({colorTemp: {range: [143, 500]}})],
+        extend: [tuyaLight({colorTemp: {range: [143, 500]}, color: true})],
         toZigbee: [tz.on_off, tzLocal.led_control],
         fromZigbee: [fz.on_off, tuya.fz.led_controller, fz.brightness],
         meta: {
