@@ -25249,6 +25249,7 @@ export const definitions: DefinitionWithExtend[] = [
         meta: {
             tuyaDatapoints: [
                 [1, "occupancy", tuya.valueConverter.trueFalse1],
+                [101, "radar_delay", tuya.valueConverter.raw],
                 [102, "presence_distance", tuya.valueConverter.raw],
                 [103, "presence_sensitivity", tuya.valueConverter.raw],
                 [104, "radar_switch", tuya.valueConverter.onOff],
@@ -25258,7 +25259,11 @@ export const definitions: DefinitionWithExtend[] = [
                 [108, "illuminance", tuya.valueConverter.raw],
                 [109, "battery", tuya.valueConverter.raw],
                 [160, "pir_threshold", tuya.valueConverter.raw],
+                [161, "pir_trigger_pulses", tuya.valueConverter.raw],
+                [162, "pir_trigger_time", tuya.valueConverter.raw],
+                [163, "pir_lock_time", tuya.valueConverter.raw],
                 [164, "radar_threshold", tuya.valueConverter.raw],
+                [165, "radar_distance_door_test", tuya.valueConverter.raw],
             ],
         },
     },
