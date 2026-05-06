@@ -387,12 +387,13 @@ export const definitions: DefinitionWithExtend[] = [
         model: "170-01",
         vendor: "Plugwise",
         description: "Emma Wired Pro / Emma Wireless",
+        version: "0.0.1",
         extend: [
             plugwiseExtend.plugwiseHvacThermostatCluster(),
             plugwiseExtend.applicationFaultCodeStatus(),
             plugwiseExtend.oemFaultCode(),
             m.temperature({
-                reporting: {min: "1_SECOND", max: 870, change: 0.1},
+                reporting: {min: "1_SECOND", max: 870, change: 10},
             }),
             m.thermostat({
                 setpoints: {
@@ -415,9 +416,7 @@ export const definitions: DefinitionWithExtend[] = [
                     configure: {reporting: {min: "1_SECOND", max: 870, change: 0}},
                 },
             }),
-            m.humidity({
-                reporting: {min: "10_SECONDS", max: 870, change: 3},
-            }),
+            m.humidity(),
             m.numeric({
                 name: "min_cool_setpoint_limit",
                 cluster: "hvacThermostat",
