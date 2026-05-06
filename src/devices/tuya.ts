@@ -25483,7 +25483,14 @@ export const definitions: DefinitionWithExtend[] = [
             e.binary("vibration", ea.STATE, true, false).withDescription("Vibration state, true: vibration detected, false: no vibration"),
             e.enum("illuminance_warning", ea.STATE, ["none", "low", "high"]).withDescription("Illuminance warning level"),
             e.battery(),
-            e.numeric("illuminance", ea.STATE).withValueMin(0).withValueMax(10000).withValueStep(1).withUnit("lux").withDescription("Illuminance"),
+            e.illuminance(),
+            e
+                .numeric("vibration_count", ea.STATE)
+                .withValueMin(0)
+                .withValueMax(500)
+                .withValueStep(1)
+                .withUnit("times")
+                .withDescription("Vibration count detected by the vibration sensor"),
             e
                 .numeric("sampling_interval", ea.STATE_SET)
                 .withValueMin(5)
@@ -25526,6 +25533,7 @@ export const definitions: DefinitionWithExtend[] = [
                 [3, "vibration", tuya.valueConverter.raw],
                 [6, "vibration_sensitivity", tuya.valueConverter.raw],
                 [20, "illuminance", tuya.valueConverter.raw],
+                [50, "vibration_count", tuya.valueConverter.raw],
                 [101, "sampling_interval", tuya.valueConverter.raw],
                 [104, "illuminance_v0", tuya.valueConverter.raw],
                 [105, "illuminance_v1", tuya.valueConverter.raw],
