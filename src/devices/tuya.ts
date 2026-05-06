@@ -10975,6 +10975,7 @@ export const definitions: DefinitionWithExtend[] = [
         },
     },
     {
+        // TS0726_4_gang_scene_switch is usually preferred
         fingerprint: tuya.fingerprint("TS0726", ["_TZ3000_wsspgtcd", "_TZ3000_s678wazd", "_TZ3002_uu4uircb", "_TZ3002_yptomml1", "_TZ3002_pw4ad2xa"]),
         model: "TS0726_4_gang",
         vendor: "Tuya",
@@ -21455,6 +21456,7 @@ export const definitions: DefinitionWithExtend[] = [
         },
     },
     {
+        // incomplete. see https://github.com/Koenkk/zigbee-herdsman-converters/pull/11271
         fingerprint: tuya.fingerprint("TS0601", ["_TZE284_cgr0rhza"]),
         model: "TS0601_thermostat_6",
         vendor: "Tuya",
@@ -21919,6 +21921,7 @@ export const definitions: DefinitionWithExtend[] = [
             "_TZ3002_pzao9ls1",
             "_TZ300A_vkflnsl0",
             "_TZ3002_eda6eitk",
+            "_TZ3000_hurauima",
         ]),
         model: "TS0726_4_gang_scene_switch",
         vendor: "Tuya",
