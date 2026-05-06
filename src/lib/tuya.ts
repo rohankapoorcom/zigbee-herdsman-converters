@@ -3720,6 +3720,10 @@ const tuyaModernExtend = {
         result.onEvent = [...(tuyaLightingColorCtrl.onEvent ?? []), ...(result.onEvent ?? [])];
         result.configure = [...(tuyaLightingColorCtrl.configure ?? []), ...(result.configure ?? [])];
 
+        const customCluster3 = tuyaClusters.addManuSpecificTuya3Cluster();
+        result.onEvent = [...(customCluster3.onEvent ?? []), ...(result.onEvent ?? [])];
+        result.configure = [...(customCluster3.configure ?? []), ...(result.configure ?? [])];
+
         result.configure.push(configureSetPowerSourceWhenUnknown("Mains (single phase)"));
 
         return result;
