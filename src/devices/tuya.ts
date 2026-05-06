@@ -4970,6 +4970,7 @@ export const definitions: DefinitionWithExtend[] = [
         meta: {coverInverted: true},
         extend: [
             tuyaBase(),
+            tuya.clusters.addTuyaClosuresWindowCoveringCluster(),
             m.deviceAddCustomCluster("closuresWindowCovering", {
                 name: "closuresWindowCovering",
                 ID: 0x0102,
@@ -5044,7 +5045,7 @@ export const definitions: DefinitionWithExtend[] = [
         vendor: "Moes",
         description: "Zigbee + RF curtain switch module",
         ota: true,
-        extend: [tuyaBase()],
+        extend: [tuyaBase(), tuya.clusters.addTuyaClosuresWindowCoveringCluster()],
         meta: {coverInverted: true},
         fromZigbee: [tuya.fz.cover_options, fz.cover_position_tilt],
         toZigbee: [tz.cover_state, tuya.tz.moes_cover_calibration, tz.cover_position_tilt, tuya.tz.cover_reversal],
